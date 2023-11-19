@@ -42,8 +42,8 @@ string randomCommand(vector<vector<int>> x, int row, int column)
 }
 vector<vector<int>> Tremaux(vector<vector<int>> x)
 {
-    int row = 0;
-    int column = 1;
+    int row = 10;
+    int column = 0;
     vector <string> PreviousCommand;
     while (1)
     {
