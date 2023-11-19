@@ -1,102 +1,87 @@
 ﻿#include <iostream>
-#include <windows.h>
-const int MazeWidth = 30;
-const int MazeHeight = 20;
-const char MazeExit = '$';
-const char Wall = '#';
-const char Free = ' ';
-const unsigned char SomeDude = 254;
-COORD MazeExitCoords;
-COORD StartingPoint;
+#include <vector>
 
-using namespace std;
-char Maze[MazeHeight][MazeWidth];
+#define ROW 12
+#define COL 12
 
-
-
-
-void FillDaMaze() {
-
-    MazeExitCoords.X = MazeWidth - 20;
-    MazeExitCoords.Y = 2;
-    StartingPoint.X = 3;
-    StartingPoint.Y = MazeHeight - 3;
-
-    for (int i = 0; i < MazeHeight; i++) {
-
-        for (int ii = 0; ii < MazeWidth; ii++) {
-
-            if (i == 0 || i == MazeHeight - 1 || ii == 0 || ii == MazeWidth - 1) {
-                Maze[i][ii] = Wall;
-            }
-            else {
-                Maze[i][ii] = Free;
-            }
-
-            if (i == MazeExitCoords.Y && ii == MazeExitCoords.X) {
-                Maze[i][ii] = MazeExit;
-            }
-            else if (i == StartingPoint.Y && ii == StartingPoint.X) {
-                Maze[i][ii] = SomeDude;
-            }
-        }
-    }
+bool isSafe(int row, int col, const std::vector<std::vector<int>>& matrix, std::vector<std::vector<bool>>& visited) {
+	return (row >= 0) && (row < ROW) && (col >= 0) && (col < COL) && (matrix[row][col] != 1) && !visited[row][col];
 }
-void PrintDaMaze(int color) {
-    SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), color);
 
-    for (int i = 0; i < MazeHeight; i++) {
+bool findExit(std::vector<std::vector<int>>& matrix, int row, int col, int exitRow, int exitCol,
+	std::vector<std::vector<bool>>& visited) {
+	if (row == exitRow && col == exitCol) {
+		return true;
+	}
 
-        for (int ii = 0; ii < MazeWidth; ii++) {
+	visited[row][col] = true;
 
-            cout << Maze[i][ii];
-        }
-        cout << endl;
-    }
+	int directions[4][2] = { {0, 1}, {1, 0}, {0, -1}, {-1, 0} };
+
+	for (int i = 0; i < 4; ++i) {
+		int nextDirX = row + directions[i][0];
+		int nextDirY = col + directions[i][1];
+
+		if (isSafe(nextDirX, nextDirY, matrix, visited)) {
+			matrix[nextDirX][nextDirY] = 2; // Помечаем путь значением 2
+
+			if (findExit(matrix, nextDirX, nextDirY, exitRow, exitCol, visited)) {
+				return true;
+			}
+		}
+	}
+
+	return false;
 }
-void FindYourWayThroughTheMaze() {
 
+int main() {
+	std::vector<std::vector<int>> matrix = {
+		{1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
+		{1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 4},
+		{1, 0, 1, 0, 1, 1, 0, 1, 0, 1, 1, 1},
+		{1, 0, 1, 0, 0, 1, 0, 1, 0, 0, 0, 1},
+		{1, 0, 0, 1, 0, 1, 0, 1, 1, 1, 0, 1},
+		{1, 1, 0, 1, 0, 1, 0, 0, 0, 1, 0, 1},
+		{1, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1},
+		{1, 0, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1},
+		{1, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 1},
+		{1, 1, 1, 1, 0, 1, 0, 1, 0, 1, 0, 1},
+		{0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1},
+		{1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1}
+	};
 
+	int startX = 0, startY = 0; // Начальная позиция
+	int exitX = 0, exitY = 0;   // Позиция выхода
 
-    if (Maze[StartingPoint.Y + 1][StartingPoint.X] != Wall && Maze[StartingPoint.Y + 1][StartingPoint.X] != SomeDude) {
-        StartingPoint.Y++;
+	for (int i = 0; i < ROW; ++i) {
+		for (int j = 0; j < COL; ++j) {
+			if (matrix[i][j] == 0) {
+				startX = 11;
+				startY = 0;
+			}
+			else if (matrix[i][j] == 4) {
+				exitX = i;
+				exitY = j;
+			}
+		}
+	}
 
+	std::vector<std::vector<bool>> visited(ROW, std::vector<bool>(COL, false));
 
+	if (findExit(matrix, startX, startY, exitX, exitY, visited)) {
+		std::cout << "Succes!" << std::endl;
+	}
+	else {
+		std::cout << "Fail!" << std::endl;
+	}
 
-    }
-    else if (Maze[StartingPoint.Y][StartingPoint.X + 1] != Wall && Maze[StartingPoint.Y][StartingPoint.X + 1] != SomeDude) {
-        StartingPoint.X++;
+	// Вывод лабиринта с отмеченным путем
+	for (int i = 0; i < ROW; ++i) {
+		for (int j = 0; j < COL; ++j) {
+			std::cout << matrix[i][j] << " ";
+		}
+		std::cout << std::endl;
+	}
 
-
-
-    }
-    else if (Maze[StartingPoint.Y - 1][StartingPoint.X] != Wall && Maze[StartingPoint.Y - 1][StartingPoint.X] != SomeDude) {
-        StartingPoint.Y--;
-
-
-
-
-
-    }
-    else if (Maze[StartingPoint.Y][StartingPoint.X - 1] != Wall && Maze[StartingPoint.Y][StartingPoint.X - 1] != SomeDude) {
-        StartingPoint.X--;
-
-
-
-    }
-
-
-    Maze[StartingPoint.Y][StartingPoint.X] = SomeDude;
-
+	return 0;
 }
-int worck() {
-
-    FillDaMaze();
-    PrintDaMaze(10);
-    while (StartingPoint.X != MazeExitCoords.X || StartingPoint.Y != MazeExitCoords.Y) {
-        FindYourWayThroughTheMaze();
-        system("CLS");
-        PrintDaMaze(10);
-        Sleep(50);
-    }
-
