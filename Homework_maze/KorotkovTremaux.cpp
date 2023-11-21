@@ -6,6 +6,8 @@
 #include <string>
 #include <ctime>
 #include <cstdlib>
+#include "Tremaux.h"
+
 using namespace std;
 int getCorrectValue(vector<vector<int>> x, int row, int  column)
 {
@@ -36,12 +38,12 @@ string randomCommand(vector<vector<int>> x, int row, int column)
         possibleCommand.push_back("right");
     if (getCorrectValue(x,row,column - 1) == 0)
         possibleCommand.push_back("left");
-    srand(time(NULL));
     int index = rand() % possibleCommand.size();
     return possibleCommand[index];
 }
 vector<vector<int>> Tremaux(vector<vector<int>> x)
 {
+    srand(time(NULL));
     int row = 10;
     int column = 0;
     vector <string> PreviousCommand;
