@@ -52,18 +52,11 @@ void maze_main_pledge(const vector<vector<int>>& maze) {
     // Инициализация лабиринта
 
     CopyMaze(maze);
-    cout << "Maze before the way:" << endl;
-    printMaze(maze);
-
+    
+   
     // Начинаем поиск пути с точки входа (10, 0)
-    if (findPathDFS(maze_copy_pledge, 10, 0)) {
-        cout << "\nShow me the way:" << endl;
-        printMaze(maze);
-        cout << endl << "===============================" << endl;
-        printMaze(maze_copy_pledge);
-    }
-    else {
-        cout << "\nThere is no way." << endl;
-    }
-
+    findPathDFS(maze_copy_pledge, 10, 0);
+ 
+       
+    
 }
