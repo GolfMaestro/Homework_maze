@@ -1,11 +1,10 @@
 #pragma once
 #include <iostream>
 #include <vector>
-vector<vector<int>> maze_copy;
-extern vector<vector<int>> maze_copy;
-void printMaze(const std::vector<std::vector<int>>& maze);
-void CopyMaze(const std::vector<std::vector<int>>& maze);
-bool isValidMove(const std::vector<std::vector<int>>& maze_copy, int x, int y);
-bool findPathDFS(std::vector<std::vector<int>>& maze_copy, int x, int y);
-
-
+using namespace std;
+extern vector<vector<int>> maze_copy_pledge;
+void printMaze(const vector<vector<int>>& maze);
+void CopyMaze(const vector<vector<int>>& maze);
+bool isValidMove(const vector<vector<int>>& maze_copy_pledge, int x, int y);
+bool findPathDFS(std::vector<vector<int>>& maze_copy_pledge, int x, int y);
+void maze_main_pledge(const vector<vector<int>>& maze);
