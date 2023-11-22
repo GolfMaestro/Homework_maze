@@ -4,20 +4,12 @@
 
 #include <vector>
 
-class SeverinMaze {
-public:
-    SeverinMaze(int rows, int cols);
-    void copyMaze(std::vector<std::vector<int>>& destination) const;
-    bool solveDeadEndFilling();
+void initSeverinMaze(std::vector<std::vector<int>>& maze, int rows, int cols);
+void copyMaze(const std::vector<std::vector<int>>& source, std::vector<std::vector<int>>& destination);
+bool solveDeadEndFilling(std::vector<std::vector<int>>& maze);
 
-private:
-    int m;
-    int n;
-    std::vector<std::vector<int>> maze;
-
-    bool isSafe(int row, int col) const;
-    bool hasDeadEnd(int row, int col) const;
-    void fillDeadEnd(int row, int col);
-};
+bool isSafe(const std::vector<std::vector<int>>& maze, int row, int col);
+bool hasDeadEnd(const std::vector<std::vector<int>>& maze, int row, int col);
+void fillDeadEnd(std::vector<std::vector<int>>& maze, int row, int col);
 
 #endif // SEVERIN_MAZE_SOLVER_H
