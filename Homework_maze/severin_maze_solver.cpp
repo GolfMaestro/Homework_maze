@@ -1,49 +1,50 @@
 // severin_maze_solver.cpp
 #include "severin_maze_solver.h"
 
-SeverinMaze::SeverinMaze(int rows, int cols) : m(rows), n(cols), maze(std::vector<std::vector<int>>(m, std::vector<int>(n))) {
+void initSeverinMaze(std::vector<std::vector<int>>& maze, int rows, int cols) {
     // Инициализация лабиринта (ваш код инициализации)
+    maze = std::vector<std::vector<int>>(rows, std::vector<int>(cols));
 }
 
-void SeverinMaze::copyMaze(std::vector<std::vector<int>>& destination) const {
-    destination = maze;
+void copyMaze(const std::vector<std::vector<int>>& source, std::vector<std::vector<int>>& destination) {
+    destination = source;
 }
 
-bool SeverinMaze::isSafe(int row, int col) const {
+bool isSafe(const std::vector<std::vector<int>>& maze, int row, int col) {
+    int m = maze.size();
+    int n = maze[0].size();
     return (row >= 0 && row < m && col >= 0 && col < n && maze[row][col] == 0);
 }
 
-bool SeverinMaze::hasDeadEnd(int row, int col) const {
-    // Проверка, является ли текущая клетка тупиковой
+bool hasDeadEnd(const std::vector<std::vector<int>>& maze, int row, int col) {
     int count = 0;
 
-    // Подсчет количества соседей, которые являются стенами
-    if (!isSafe(row + 1, col)) count++;
-    if (!isSafe(row - 1, col)) count++;
-    if (!isSafe(row, col + 1)) count++;
-    if (!isSafe(row, col - 1)) count++;
+    if (!isSafe(maze, row + 1, col)) count++;
+    if (!isSafe(maze, row - 1, col)) count++;
+    if (!isSafe(maze, row, col + 1)) count++;
+    if (!isSafe(maze, row, col - 1)) count++;
 
-    return (count >= 3); // Вернуть true, если у текущей клетки три или более стенных соседа
+    return (count >= 3);
 }
 
-void SeverinMaze::fillDeadEnd(int row, int col) {
-    // Заполнение тупиковой клетки
+void fillDeadEnd(std::vector<std::vector<int>>& maze, int row, int col) {
     maze[row][col] = 1;
 }
 
-bool SeverinMaze::solveDeadEndFilling() {
-    std::vector<std::vector<int>> severin_maze_copy(m, std::vector<int>(n, 0)); // Создание копии лабиринта
-    copyMaze(severin_maze_copy);
+bool solveDeadEndFilling(std::vector<std::vector<int>>& maze) {
+    int m = maze.size();
+    int n = maze[0].size();
 
-    // Алгоритм заполнения тупиков
+    std::vector<std::vector<int>> severin_maze_copy(m, std::vector<int>(n, 0));
+    copyMaze(maze, severin_maze_copy);
+
     for (int i = 1; i < m - 1; ++i) {
         for (int j = 1; j < n - 1; ++j) {
-            if (hasDeadEnd(i, j)) {
-                fillDeadEnd(i, j);
+            if (hasDeadEnd(severin_maze_copy, i, j)) {
+                fillDeadEnd(maze, i, j);
             }
         }
     }
 
-    // Возвращаем true, если найден выход после заполнения тупиков
     return false;
 }
