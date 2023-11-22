@@ -8,7 +8,7 @@ using namespace std;
 #define NROWS 12
 #define MCOLS 12
 vector<vector<int>> maze_copy_wave;
-void CopyMaze_pledge(const vector<vector<int>>& maze) {
+void CopyMaze_wave(const vector<vector<int>>& maze) {
     maze_copy_wave = maze;
 }
 
@@ -24,7 +24,7 @@ bool find_path(vector<vector<int>>& maze_copy_wave, int x, int y) {
     return false;
 }
 bool maze_main_wave(const vector<vector<int>>& maze) {
-    CopyMaze_pledge(maze);
+    CopyMaze_wave(maze);
     if (find_path(maze_copy_wave, 0, 10) == true) {
         /*printf("MAZE:\n");
         for (int i = 0; i < NROWS; i++) {
