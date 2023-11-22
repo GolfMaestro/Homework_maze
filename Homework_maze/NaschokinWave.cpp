@@ -23,7 +23,7 @@ bool find_path(vector<vector<int>>& maze_copy_wave, int x, int y) {
     if (find_path(maze_copy_wave, x - 1, y) == true) return true;
     return false;
 }
-bool wave(const vector<vector<int>>& maze) {
+bool maze_main_wave(const vector<vector<int>>& maze) {
     CopyMaze_pledge(maze);
     if (find_path(maze_copy_wave, 0, 10) == true) {
         /*printf("MAZE:\n");
