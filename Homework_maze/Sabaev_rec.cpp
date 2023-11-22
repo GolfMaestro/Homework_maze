@@ -2,10 +2,10 @@
 #include <vector>
 #include "Sabaev_rec.h"
 using namespace std;
-// Размеры лабиринта
+// ГђГ Г§Г¬ГҐГ°Г» Г«Г ГЎГЁГ°ГЁГ­ГІГ 
 const int ROWS = 12;
 const int COLS = 12;
-// Функция для вывода лабиринта
+// Г”ГіГ­ГЄГ¶ГЁГї Г¤Г«Гї ГўГ»ГўГ®Г¤Г  Г«Г ГЎГЁГ°ГЁГ­ГІГ 
 void printMaze(const vector<vector<int>>& maze) {
     for (const auto& row : maze) {
         for (int cell : row) {
@@ -21,27 +21,27 @@ void CopyMaze_Rec(const vector<vector<int>>& maze) {
     maze_copy_rec = maze;
 }
 
-// Рекурсивная функция поиска пути в лабиринте
+// ГђГҐГЄГіГ°Г±ГЁГўГ­Г Гї ГґГіГ­ГЄГ¶ГЁГї ГЇГ®ГЁГ±ГЄГ  ГЇГіГІГЁ Гў Г«Г ГЎГЁГ°ГЁГ­ГІГҐ
 bool findPath(vector<vector<int>>& maze_copy_rec, int x, int y) {
-    // Проверка на выход за границы лабиринта
+    // ГЏГ°Г®ГўГҐГ°ГЄГ  Г­Г  ГўГ»ГµГ®Г¤ Г§Г  ГЈГ°Г Г­ГЁГ¶Г» Г«Г ГЎГЁГ°ГЁГ­ГІГ 
     if (x < 0 || x >= COLS || y < 0 || y >= ROWS) {
         return false;
     }
-    // Проверка достижения конечной точки
+    // ГЏГ°Г®ГўГҐГ°ГЄГ  Г¤Г®Г±ГІГЁГ¦ГҐГ­ГЁГї ГЄГ®Г­ГҐГ·Г­Г®Г© ГІГ®Г·ГЄГЁ
     if (maze_copy_rec[y][x] == 4) {
         return true;
     }
-    // Проверка на стену, уже посещенную клетку или конечную точку
+    // ГЏГ°Г®ГўГҐГ°ГЄГ  Г­Г  Г±ГІГҐГ­Гі, ГіГ¦ГҐ ГЇГ®Г±ГҐГ№ГҐГ­Г­ГіГѕ ГЄГ«ГҐГІГЄГі ГЁГ«ГЁ ГЄГ®Г­ГҐГ·Г­ГіГѕ ГІГ®Г·ГЄГі
     if (maze_copy_rec[y][x] != 0) {
         return false;
     }
-    // Помечаем текущую клетку как посещенную
+    // ГЏГ®Г¬ГҐГ·Г ГҐГ¬ ГІГҐГЄГіГ№ГіГѕ ГЄГ«ГҐГІГЄГі ГЄГ ГЄ ГЇГ®Г±ГҐГ№ГҐГ­Г­ГіГѕ
     maze_copy_rec[y][x] = 2;
-    // Рекурсивный вызов для движения вправо, вниз, влево и вверх
+    // ГђГҐГЄГіГ°Г±ГЁГўГ­Г»Г© ГўГ»Г§Г®Гў Г¤Г«Гї Г¤ГўГЁГ¦ГҐГ­ГЁГї ГўГЇГ°Г ГўГ®, ГўГ­ГЁГ§, ГўГ«ГҐГўГ® ГЁ ГўГўГҐГ°Гµ
     if (findPath(maze_copy_rec, x + 1, y) || findPath(maze_copy_rec, x, y + 1) || findPath(maze_copy_rec, x - 1, y) || findPath(maze_copy_rec, x, y - 1)) {
         return true;
     }
-    // Если путь не найден, возвращаемся назад и отмечаем текущую клетку как 0
+    // Г…Г±Г«ГЁ ГЇГіГІГј Г­ГҐ Г­Г Г©Г¤ГҐГ­, ГўГ®Г§ГўГ°Г Г№Г ГҐГ¬Г±Гї Г­Г Г§Г Г¤ ГЁ Г®ГІГ¬ГҐГ·Г ГҐГ¬ ГІГҐГЄГіГ№ГіГѕ ГЄГ«ГҐГІГЄГі ГЄГ ГЄ 0
     maze_copy_rec[y][x] = 0;
     return false;
 }
@@ -49,7 +49,7 @@ bool findPath(vector<vector<int>>& maze_copy_rec, int x, int y) {
 
 bool maze_main_rec(const vector<vector<int>>& maze) {
     CopyMaze_Rec(maze);
-    if (find_path(maze_copy_rec, 0, 10) == true) {
+    if (findPath(maze_copy_rec, 0, 10) == true) {
         //printMaze(maze);
         return true;
     }
