@@ -31,13 +31,13 @@ bool findPathDFS_pledge(vector<vector<int>>& maze_copy_pledge, int x, int y) {
 
     if (isValidMove_pledge(maze_copy_pledge, x, y)) {
         // Помечаем текущую ячейку как посещенную
-        maze_copy_pledge[x][y] = 2;
+        maze_copy_pledge[x][y] = 3;
 
         // Пробуем двигаться во всех возможных направлениях
         if (findPathDFS_pledge(maze_copy_pledge, x + 1, y) || findPathDFS_pledge(maze_copy_pledge, x - 1, y) ||
             findPathDFS_pledge(maze_copy_pledge, x, y + 1) || findPathDFS_pledge(maze_copy_pledge, x, y - 1)) {
             // Если путь найден, помечаем ячейку как часть пути
-            maze_copy_pledge[x][y] = 3;
+            maze_copy_pledge[x][y] = 2;
             return true;
         }
 
