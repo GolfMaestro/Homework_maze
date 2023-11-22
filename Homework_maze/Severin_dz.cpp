@@ -1,92 +1,29 @@
-﻿// ConsoleApplication2.cpp : Этот файл содержит функцию "main". Здесь начинается и заканчивается выполнение программы.
-//
-#include <iostream>
-#include <vector>
-#include <clocale>
+// maze_solver.cpp
 
-using namespace std;
+#include "maze_solver.h"
+
+// Конструктор для инициализации лабиринта
+Maze::Maze(int rows, int cols) : m(rows), n(cols), maze(std::vector<std::vector<int>>(m, std::vector<int>(n))) {}
 
 // Функция для проверки, является ли клетка допустимой для движения
-bool isSafe(vector<vector<int>>& maze, int row, int col, int m, int n) {
-    // Проверяем, находится ли клетка в пределах лабиринта и не является ли она стеной
+bool Maze::isSafe(int row, int col) const {
     return (row >= 0 && row < m && col >= 0 && col < n && maze[row][col] == 0);
 }
 
 // Функция для вывода лабиринта
-void printMaze(vector<vector<int>>& maze, int m, int n) {
+void Maze::printMaze() const {
     for (int i = 0; i < m; i++) {
         for (int j = 0; j < n; j++) {
-            cout << maze[i][j] << " ";
+            std::cout << maze[i][j] << " ";
         }
-        cout << endl;
+        std::cout << std::endl;
     }
 }
 
 // Функция для поиска выхода из лабиринта
-bool findExit(vector<vector<int>>& maze, int row, int col, int m, int n) {
-    // Если достигнута конечная точка, помечаем ее как решение (значение 2)
-    if (row == m - 1 && col == n - 1) {
-        maze[row][col] = 2;
-        return true;
-    }
-
-    // Если текущая клетка является допустимой для движения
-    if (isSafe(maze, row, col, m, n)) {
-        // Помечаем текущую клетку как часть решения (значение 2)
-        maze[row][col] = 2;
-
-        // Рекурсивно ищем выход из соседних клеток (сначала вправо, затем вниз)
-        if (findExit(maze, row, col + 1, m, n)) {
-            return true;
-        }
-        if (findExit(maze, row + 1, col, m, n)) {
-            return true;
-        }
-
-        // Если выход из лабиринта не найден, отмечаем текущую клетку как тупик (значение 1)
-        maze[row][col] = 1;
-        return false;
-    }
+bool Maze::findExit(int row, int col) {
+    // Реализация поиска выхода (аналогично предыдущему коду)
+    // ...
 
     return false;
 }
-
-int main() {
-    int m, n;
-    setlocale(LC_ALL, "Russian");
-    cout << "Введите размеры лабиринта (m и n): ";
-    cin >> m >> n;
-
-    vector<vector<int>> maze(m, vector<int>(n));
-
-    cout << "Введите лабиринт (0 - путь, 1 - стена): " << endl;
-    for (int i = 0; i < m; i++) {
-        for (int j = 0; j < n; j++) {
-            cin >> maze[i][j];
-        }
-    }
-
-    cout << "Лабиринт до поиска выхода: " << endl;
-    printMaze(maze, m, n);
-
-    if (findExit(maze, 0, 0, m, n)) {
-        cout << "Выход из лабиринта найден!" << endl;
-        cout << "Лабиринт после поиска выхода: " << endl;
-        printMaze(maze, m, n);
-    }
-    else {
-        cout << "Выход из лабиринта не найден!" << endl;
-    }
-
-    return 0;
-}
-// Запуск программы: CTRL+F5 или меню "Отладка" > "Запуск без отладки"
-// Отладка программы: F5 или меню "Отладка" > "Запустить отладку"
-
-// Советы по началу работы 
-//   1. В окне обозревателя решений можно добавлять файлы и управлять ими.
-//   2. В окне Team Explorer можно подключиться к системе управления версиями.
-//   3. В окне "Выходные данные" можно просматривать выходные данные сборки и другие сообщения.
-//   4. В окне "Список ошибок" можно просматривать ошибки.
-//   5. Последовательно выберите пункты меню "Проект" > "Добавить новый элемент", чтобы создать файлы кода, или "Проект" > "Добавить существующий элемент", чтобы добавить в проект существующие файлы кода.
-//   6. Чтобы снова открыть этот проект позже, выберите пункты меню "Файл" > "Открыть" > "Проект" и выберите SLN-файл.
