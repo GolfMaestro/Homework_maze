@@ -19,7 +19,21 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="AkulovPledge.cpp" />
+    <ClCompile Include="KorotkovTremaux.cpp" />
     <ClCompile Include="maze_solve.cpp" />
+    <ClCompile Include="NaschokinWave.cpp" />
+    <ClCompile Include="Sabaev_rec.cpp" />
+    <ClCompile Include="SamokrutovWallfollower.cpp" />
+    <ClCompile Include="severin_maze_solver.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="AkulovPledge.h" />
+    <ClInclude Include="NaschokinWave.h" />
+    <ClInclude Include="Sabaev_rec.h" />
+    <ClInclude Include="SamokrutovWallFollower.h" />
+    <ClInclude Include="severin_maze_solver.h" />
+    <ClInclude Include="Tremaux.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>
