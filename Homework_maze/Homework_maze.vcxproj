@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="AkulovDFS.cpp" />
     <ClCompile Include="AkulovPledge.cpp" />
     <ClCompile Include="KorotkovTremaux.cpp" />
     <ClCompile Include="maze_solve.cpp" />
@@ -28,6 +29,7 @@
     <ClCompile Include="severin_maze_solver.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AkulovDFS.h" />
     <ClInclude Include="AkulovPledge.h" />
     <ClInclude Include="maze.h" />
     <ClInclude Include="NaschokinWave.h" />
@@ -35,6 +37,9 @@
     <ClInclude Include="SamokrutovWallFollower.h" />
     <ClInclude Include="severin_maze_solver.h" />
     <ClInclude Include="Tremaux.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="data.txt" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>

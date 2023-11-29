@@ -36,6 +36,9 @@
     <ClCompile Include="severin_maze_solver.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="AkulovDFS.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AkulovPledge.h">
@@ -59,5 +62,11 @@
     <ClInclude Include="maze.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="AkulovDFS.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="data.txt" />
   </ItemGroup>
 </Project>

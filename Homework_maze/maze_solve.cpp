@@ -2,7 +2,7 @@
 #include <vector>
 #include <chrono>
 #include <fstream>
-#include "AkulovPledge.h"
+#include "AkulovDFS.h"
 #include "NaschokinWave.h"
 #include "SamokrutovWallFollower.h"
 #include "Sabaev_rec.h"
@@ -76,8 +76,8 @@ int main() { // the only one main in project
 
     cout << "Akulov Vladislav. Pledge algorithm solution: " << endl;
     auto start = steady_clock::now();
-    maze_main_pledge(maze);
-    printMaze(maze_copy_pledge, columns, rows);
+    maze_main_DFS(maze);
+    printMaze(maze_copy_DFS, columns, rows);
     auto finish = steady_clock::now();
     auto duration = duration_cast<microseconds>(finish - start).count();
     times.push_back(duration);
@@ -144,5 +144,8 @@ int main() { // the only one main in project
         cout << members[i] << ": " << times[i] << endl;
 
     }
+    char tttt;
+    cout << "Press any button to exit";
+    cin >> tttt;
 
 }
