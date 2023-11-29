@@ -21,9 +21,6 @@
     <ClCompile Include="KorotkovTremaux.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="AkulovPledge.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="NaschokinWave.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -41,9 +38,6 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="AkulovPledge.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Tremaux.h">
       <Filter>Header Files</Filter>
     </ClInclude>

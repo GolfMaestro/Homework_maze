@@ -20,7 +20,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AkulovDFS.cpp" />
-    <ClCompile Include="AkulovPledge.cpp" />
     <ClCompile Include="KorotkovTremaux.cpp" />
     <ClCompile Include="maze_solve.cpp" />
     <ClCompile Include="NaschokinWave.cpp" />
@@ -30,7 +29,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AkulovDFS.h" />
-    <ClInclude Include="AkulovPledge.h" />
     <ClInclude Include="maze.h" />
     <ClInclude Include="NaschokinWave.h" />
     <ClInclude Include="Sabaev_rec.h" />
