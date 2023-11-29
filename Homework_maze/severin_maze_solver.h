@@ -1,11 +1,14 @@
-#pragma once
-#include <iostream>
+#ifndef MAZE_SOLVER_H
+#define MAZE_SOLVER_H
+
 #include <vector>
+#include <stack>
 
-extern std::vector<std::vector<int>> maze_copy_deadend;
+const int ROWS = 12;
+const int COLS = 12;
 
-void CopyMaze_deadend(const std::vector<std::vector<int>>& maze);
-bool isSafe(int row, int col, const std::vector<std::vector<int>>& maze_copy_deadend, std::vector<std::vector<bool>>& visited);
-bool isDeadEnd(int row, int col, const std::vector<std::vector<int>>& maze_copy_deadend);
-void fillDeadEnds(std::vector<std::vector<int>>& maze_copy_deadend);
-bool maze_main_deadend(const std::vector<std::vector<int>>& maze);
+bool isValid(int row, int col);
+void printMaze(const std::vector<std::vector<int>>& maze);
+void deadEndFilling(std::vector<std::vector<int>>& maze, int startRow, int startCol, int endRow, int endCol);
+
+#endif  // MAZE_SOLVER_H
