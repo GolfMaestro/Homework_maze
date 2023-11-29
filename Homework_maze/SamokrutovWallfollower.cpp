@@ -3,10 +3,10 @@
 #include "SamokrutovWallFollower.h"
 #include "maze.h"
 
-#define ROW 12
-#define COL 12
+#define ROW rows
+#define COL columns
 using namespace std;
-vector<vector<bool>> visited(ROW, vector<bool>(COL, false));
+
 vector<vector<int>> maze_copy_wallfollower;
 
 
@@ -45,6 +45,7 @@ bool findExit(vector<vector<int>>& maze_copy_wallfollower, int row, int col, int
 }
 
 bool maze_main_wallfollower(const vector<vector<int>>& maze){
+	vector<vector<bool>> visited(ROW, vector<bool>(COL, false));
 	CopyMaze_wallfollower(maze);
 	int startX = 0, startY = 0; // Начальная позиция
 	int exitX = 0, exitY = 0;   // Позиция выхода
@@ -62,15 +63,7 @@ bool maze_main_wallfollower(const vector<vector<int>>& maze){
 		}
 	}
 
-	
-	
 
-	if (findExit(maze_copy_wallfollower, startX, startY, exitX, exitY, visited)) {
-		std::cout << "Succes!" << std::endl;
-	}
-	else {
-		std::cout << "Fail!" << std::endl;
-	}
 
 	// Вывод лабиринта с отмеченным путем
 	/*for (int i = 0; i < ROW; ++i) {
