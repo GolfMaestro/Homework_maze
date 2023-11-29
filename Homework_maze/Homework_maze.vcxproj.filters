@@ -56,5 +56,8 @@
     <ClInclude Include="severin_maze_solver.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="maze.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

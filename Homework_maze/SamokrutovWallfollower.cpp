@@ -1,6 +1,7 @@
 ﻿#include <iostream>
 #include <vector>
 #include "SamokrutovWallFollower.h"
+#include "maze.h"
 
 #define ROW 12
 #define COL 12

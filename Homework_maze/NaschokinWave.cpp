@@ -2,18 +2,19 @@
 #include <array>
 #include <vector>
 #include "NaschokinWave.h"
+#include "maze.h"
 
 using namespace std;
 
-#define NROWS 12
-#define MCOLS 12
+//#define NROWS 12
+//#define MCOLS 12
 vector<vector<int>> maze_copy_wave;
 void CopyMaze_wave(const vector<vector<int>>& maze) {
     maze_copy_wave = maze;
 }
 
 bool find_path(vector<vector<int>>& maze_copy_wave, int x, int y) {
-    if (x < 0 || x > MCOLS - 1 || y < 0 || y > NROWS - 1) return false;
+    if (x < 0 || x > columns - 1 || y < 0 || y > rows - 1) return false;
     if (maze_copy_wave[y][x] == 4) return true;
     if (maze_copy_wave[y][x] != 0) return false;
     maze_copy_wave[y][x] = 2;

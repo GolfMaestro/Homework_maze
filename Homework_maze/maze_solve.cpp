@@ -36,11 +36,13 @@ void printMaze(const vector<vector<int>>& maze, int rows, int columns) {
     }
 }
 
+int rows;
+int columns;
+
 
 int main() { // the only one main in project
 
-    int rows;
-    int columns;
+
     int value;
     vector<int> rows_vector;
     vector<vector<int>> maze;

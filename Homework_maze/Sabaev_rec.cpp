@@ -1,10 +1,12 @@
 #include <iostream>
 #include <vector>
 #include "Sabaev_rec.h"
+#include "maze.h"
+
 using namespace std;
 // Ðàçìåðû ëàáèðèíòà
-const int ROWS = 12;
-const int COLS = 12;
+//const int ROWS = 12;
+//const int COLS = 12;
 // Ôóíêöèÿ äëÿ âûâîäà ëàáèðèíòà
 void printMaze(const vector<vector<int>>& maze) {
     for (const auto& row : maze) {
@@ -24,7 +26,7 @@ void CopyMaze_Rec(const vector<vector<int>>& maze) {
 // Ðåêóðñèâíàÿ ôóíêöèÿ ïîèñêà ïóòè â ëàáèðèíòå
 bool findPath(vector<vector<int>>& maze_copy_rec, int x, int y) {
     // Ïðîâåðêà íà âûõîä çà ãðàíèöû ëàáèðèíòà
-    if (x < 0 || x >= COLS || y < 0 || y >= ROWS) {
+    if (x < 0 || x >= columns || y < 0 || y >= rows) {
         return false;
     }
     // Ïðîâåðêà äîñòèæåíèÿ êîíå÷íîé òî÷êè

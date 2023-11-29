@@ -29,6 +29,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AkulovPledge.h" />
+    <ClInclude Include="maze.h" />
     <ClInclude Include="NaschokinWave.h" />
     <ClInclude Include="Sabaev_rec.h" />
     <ClInclude Include="SamokrutovWallFollower.h" />
