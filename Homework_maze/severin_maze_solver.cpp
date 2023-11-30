@@ -1,20 +1,30 @@
-#include "maze_solver.h"
+#include "severin_maze_solver.h"
 #include <iostream>
+#include <vector>
+#include <stack>
+#include "maze.h"
+
+using namespace std;
+vector<vector<int>>maze_copy_deadend;
+
+void CopyMaze_deadend(const vector<vector<int>>& maze) {
+    maze_copy_deadend = maze;
+}
 
 bool isValid(int row, int col) {
-    return (row >= 0) && (row < ROWS) && (col >= 0) && (col < COLS);
+    return (row >= 0) && (row < rows) && (col >= 0) && (col < columns);
 }
 
-void printMaze(const std::vector<std::vector<int>>& maze) {
-    for (int i = 0; i < ROWS; ++i) {
-        for (int j = 0; j < COLS; ++j) {
-            std::cout << maze[i][j] << " ";
-        }
-        std::cout << std::endl;
-    }
-}
+//void printMaze(const std::vector<std::vector<int>>& maze) {
+//    for (int i = 0; i < rows; ++i) {
+//        for (int j = 0; j < columns; ++j) {
+//            std::cout << maze[i][j] << " ";
+//        }
+//        std::cout << std::endl;
+//    }
+//}
 
-void deadEndFilling(std::vector<std::vector<int>>& maze, int startRow, int startCol, int endRow, int endCol) {
+void deadEndFilling(std::vector<std::vector<int>>& maze_copy_deadend, int startRow, int startCol, int endRow, int endCol) {
     std::stack<std::pair<int, int>> pathStack;
     pathStack.push(std::make_pair(startRow, startCol));
 
@@ -26,20 +36,20 @@ void deadEndFilling(std::vector<std::vector<int>>& maze, int startRow, int start
             break;
         }
 
-        maze[currentRow][currentCol] = 2;
+        maze_copy_deadend[currentRow][currentCol] = 2;
 
         bool foundNextPoint = false;
         for (int i = -1; i <= 1; i += 2) {
             int newRow = currentRow + i;
             int newCol = currentCol + i;
 
-            if (isValid(newRow, currentCol) && maze[newRow][currentCol] == 0) {
+            if (isValid(newRow, currentCol) && maze_copy_deadend[newRow][currentCol] == 0) {
                 pathStack.push(std::make_pair(newRow, currentCol));
                 foundNextPoint = true;
                 break;
             }
 
-            if (isValid(currentRow, newCol) && maze[currentRow][newCol] == 0) {
+            if (isValid(currentRow, newCol) && maze_copy_deadend[currentRow][newCol] == 0) {
                 pathStack.push(std::make_pair(currentRow, newCol));
                 foundNextPoint = true;
                 break;
@@ -50,4 +60,20 @@ void deadEndFilling(std::vector<std::vector<int>>& maze, int startRow, int start
             pathStack.pop();
         }
     }
+}
+
+
+void maze_main_deadend(const vector<vector<int>>& maze) {
+    
+    CopyMaze_deadend(maze);
+
+    // Новые начальные и конечные точки для примера
+    int startRow = 0;
+    int startCol = 10;
+    int endRow = 1;
+    int endCol = 11;
+
+    // Запускаем алгоритм "Dead-end-filling"
+    deadEndFilling(maze_copy_deadend, startRow, startCol, endRow, endCol);
+
 }
