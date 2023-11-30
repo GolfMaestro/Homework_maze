@@ -43,13 +43,15 @@ void deadEndFilling(std::vector<std::vector<int>>& maze_copy_deadend, int startR
             int newRow = currentRow + i;
             int newCol = currentCol + i;
 
-            if (isValid(newRow, currentCol) && maze_copy_deadend[newRow][currentCol] == 0) {
+            if ((isValid(newRow, currentCol) && maze_copy_deadend[newRow][currentCol] == 0) or
+                (isValid(newRow, currentCol) && maze_copy_deadend[newRow][currentCol] == 4)) {
                 pathStack.push(std::make_pair(newRow, currentCol));
                 foundNextPoint = true;
                 break;
             }
 
-            if (isValid(currentRow, newCol) && maze_copy_deadend[currentRow][newCol] == 0) {
+            if ((isValid(currentRow, newCol) && maze_copy_deadend[currentRow][newCol] == 0) or 
+                (isValid(currentRow, newCol) && maze_copy_deadend[currentRow][newCol] == 4)) {
                 pathStack.push(std::make_pair(currentRow, newCol));
                 foundNextPoint = true;
                 break;
@@ -68,8 +70,8 @@ void maze_main_deadend(const vector<vector<int>>& maze) {
     CopyMaze_deadend(maze);
 
     // Ќовые начальные и конечные точки дл€ примера
-    int startRow = 0;
-    int startCol = 10;
+    int startRow = 10;
+    int startCol = 0;
     int endRow = 1;
     int endCol = 11;
 
