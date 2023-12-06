@@ -47,7 +47,7 @@ int main() { // the only one main in project
     vector<int> rows_vector;
     vector<vector<int>> maze;
 
-    ifstream data("data.txt");
+    ifstream data("data2.txt");
     if (!data.is_open()) {
         cout << "file doesn't exist";
         return 0;
@@ -66,14 +66,14 @@ int main() { // the only one main in project
         return 0;
     }
 
-    int count = 0;
+    int count = 1;
     int count_four = 0;
     //cout << rows << endl << columns << endl;
-
     for (int i = 0; i < columns; ++i) {
         for (int j = 0; j < rows; ++j) {
             data >> value;
-            if (data.eof()) {
+            cout << count << endl;
+            if (data.eof() and ((columns * rows) != count)) {
                 cout << "not enought values";
                 return 0;
             }
