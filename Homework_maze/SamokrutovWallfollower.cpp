@@ -33,7 +33,9 @@ bool findExit(vector<vector<int>>& maze_copy_wallfollower, int row, int col, int
 		int nextDirY = col + directions[i][1];
 
 		if (isSafe(nextDirX, nextDirY, maze_copy_wallfollower, visited)) {
-			maze_copy_wallfollower[nextDirX][nextDirY] = 2; // Помечаем путь значением 2
+			if (maze_copy_wallfollower[nextDirX][nextDirY] == 0) {
+				maze_copy_wallfollower[nextDirX][nextDirY] = 2; // Помечаем путь значением 2 только если текущая ячейка содержит 0
+			}
 
 			if (findExit(maze_copy_wallfollower, nextDirX, nextDirY, exitRow, exitCol, visited)) {
 				return true;
@@ -44,7 +46,9 @@ bool findExit(vector<vector<int>>& maze_copy_wallfollower, int row, int col, int
 	return false;
 }
 
-bool maze_main_wallfollower(const vector<vector<int>>& maze){
+
+
+bool maze_main_wallfollower(const vector<vector<int>>& maze) {
 	vector<vector<bool>> visited(ROW, vector<bool>(COL, false));
 	CopyMaze_wallfollower(maze);
 	int startX = 0, startY = 0; // Начальная позиция
@@ -63,6 +67,25 @@ bool maze_main_wallfollower(const vector<vector<int>>& maze){
 		}
 	}
 
+	if (findExit(maze_copy_wallfollower, startX, startY, exitX, exitY, visited)) {
+		std::cout << "Succes!" << std::endl;
+	}
+	else {
+		std::cout << "Fail!" << std::endl;
+	}
+
+
+	// Вывод лабиринта с отмеченным путем
+	/*for (int i = 0; i < ROW; ++i) {
+	  for (int j = 0; j < COL; ++j) {
+		std::cout << maze_copy_wallfollower[i][j] << " ";
+	  }
+	  std::cout << std::endl;
+	}*/
+
+	return 0;
+}
+
 
 
 	// Вывод лабиринта с отмеченным путем
@@ -72,6 +95,3 @@ bool maze_main_wallfollower(const vector<vector<int>>& maze){
 		}
 		std::cout << std::endl;
 	}*/
-
-	return 0;
-}
