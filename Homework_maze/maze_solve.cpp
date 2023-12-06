@@ -35,7 +35,7 @@ void printMaze(const vector<vector<int>>& maze, int rows, int columns) {
         cout << endl;
     }
 }
-// data - 12x12, data2 - 61x62, data3 - 401x401, data4 - another 12x12
+
 int rows;
 int columns;
 
@@ -47,7 +47,7 @@ int main() { // the only one main in project
     vector<int> rows_vector;
     vector<vector<int>> maze;
 
-    ifstream data("data2.txt");
+    ifstream data("data2.txt"); // data - 12x12, data2 - 61x62, data3 - 401x401, data4 - another 12x12
     if (!data.is_open()) {
         cout << "file doesn't exist";
         return 0;
@@ -72,7 +72,7 @@ int main() { // the only one main in project
     for (int i = 0; i < columns; ++i) {
         for (int j = 0; j < rows; ++j) {
             data >> value;
-            cout << count << endl;
+            //cout << count << endl;
             if (data.eof() and ((columns * rows) != count)) {
                 cout << "not enought values";
                 return 0;
