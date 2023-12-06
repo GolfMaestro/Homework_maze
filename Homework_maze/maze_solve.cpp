@@ -35,7 +35,7 @@ void printMaze(const vector<vector<int>>& maze, int rows, int columns) {
         cout << endl;
     }
 }
-
+// data - 12x12, data2 - 61x62, data3 - 401x401, data4 - another 12x12
 int rows;
 int columns;
 
@@ -47,19 +47,90 @@ int main() { // the only one main in project
     vector<int> rows_vector;
     vector<vector<int>> maze;
 
-    ifstream data("data.txt"); // data - 12x12, data2 - 61x62, data3 - 401x401, data4 - another 12x12
+    ifstream data("data.txt");
+    if (!data.is_open()) {
+        cout << "file doesn't exist";
+        return 0;
+    }
     data >> rows;
     data >> columns;
+    //if ((typeid(rows).name() != "int") or (typeid(columns).name() != "int")) {
+    //    cout << typeid(rows).name();
+    //    cout << typeid(columns).name();
+    //    cout << "wrong input5";
+    //    return 0;
+    //}
 
-    cout << rows << endl << columns << endl;
+    if ((rows == 0) or (columns == 0)) {
+        cout << "wrong size";
+        return 0;
+    }
+
+    int count = 0;
+    int count_four = 0;
+    //cout << rows << endl << columns << endl;
 
     for (int i = 0; i < columns; ++i) {
         for (int j = 0; j < rows; ++j) {
             data >> value;
-            rows_vector.push_back(value);
+            if (data.eof()) {
+                cout << "not enought values";
+                return 0;
+            }
+            if (value == 0 or value == 1) {
+                rows_vector.push_back(value);
+                count += 1;
+            }
+            else if (value == 4) {
+                rows_vector.push_back(value);
+                count_four += 1;
+                count += 1;
+            }
+            else {
+                cout << "wrong maze element";
+                return 0;
+            }
         }
         maze.push_back(rows_vector);
         rows_vector.clear();
+    }
+
+    if (maze[10][0] != 0) {
+        cout << "Enter must be on position (10, 0)";
+        return 0;
+    }
+    //cout << count_four << endl;
+    if (count_four != 1) {
+        cout << "You forgot about exit. Add number 4 to your maze";
+        return 0;
+    }
+
+    // Check external walls
+
+    for (int i1 = 0; i1 < rows; ++i1) { // columns
+
+        if (maze[i1][0] == 0) {
+            if (i1 != 10) {
+                cout << "You forgot about external walls";
+                return 0;
+            }
+        }
+        if (maze[i1][columns - 1] == 0) {
+            cout << "You forgot about external walls";
+            return 0;
+        }
+
+    }
+
+    for (int i2 = 0; i2 < columns; ++i2) { // rows
+        if (maze[0][i2] == 0) {
+            cout << "You forgot about external walls";
+            return 0;
+        }
+        if (maze[rows - 1][i2] == 0) {
+            cout << "You forgot about external walls";
+            return 0;
+        }
     }
 
     cout << endl << "Source maze" << endl;
