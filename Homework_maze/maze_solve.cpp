@@ -39,15 +39,50 @@ void printMaze(const vector<vector<int>>& maze, int rows, int columns) {
 int rows;
 int columns;
 
+vector<vector<int>> maze;
+vector<long long> times;
+
+void calculate_time(vector<vector<int>> maze, int choose) {
+    auto start = steady_clock::now();
+    switch (choose)
+    {
+    case 1:
+        maze_main_DFS(maze);
+        break;
+    case 2:
+        maze_main_wave(maze);
+        break;
+    case 3:
+        maze_main_wallfollower(maze);
+        break;
+    case 4:
+        maze_main_rec(maze);
+        break;
+    case 5:
+        Tremaux(maze);
+        break;
+    case 6:
+        maze_main_deadend(maze);
+        break;
+    default:
+        break;
+    }
+    auto finish = steady_clock::now();
+    auto duration = duration_cast<microseconds>(finish - start).count();
+    times.push_back(duration);
+    cout << endl << "Programm work: " << duration << " microseconds." << endl;
+}
+
+
 
 int main() { // the only one main in project
 
 
     int value;
     vector<int> rows_vector;
-    vector<vector<int>> maze;
+    //vector<vector<int>> maze;
 
-    ifstream data("data2.txt"); // data - 12x12, data2 - 61x62, data3 - 401x401, data4 - another 12x12
+    ifstream data("data.txt"); // data - 12x12, data2 - 61x62, data3 - 401x401, data4 - another 12x12
     if (!data.is_open()) {
         cout << "file doesn't exist";
         return 0;
@@ -100,7 +135,7 @@ int main() { // the only one main in project
         return 0;
     }
     //cout << count_four << endl;
-    if (count_four != 1) {
+    if (count_four < 1) {
         cout << "You forgot about exit. Add number 4 to your maze";
         return 0;
     }
@@ -137,7 +172,7 @@ int main() { // the only one main in project
     printMaze(maze, columns, rows);
     cout << endl;
 
-    vector<long long> times;
+    //vector<long long> times;
     vector<string> members = { "Akulov", "Naschokin", "Samokrutov", "Sabaev", "Korotkov", "Severin" };
 
     //cout << "Source maze: " << endl;
@@ -146,72 +181,34 @@ int main() { // the only one main in project
     cout << endl;
 
 
-    cout << "Akulov Vladislav. Pledge algorithm solution: " << endl;
-    auto start = steady_clock::now();
-    maze_main_DFS(maze);
-    auto finish = steady_clock::now();
-    auto duration = duration_cast<microseconds>(finish - start).count();
-    times.push_back(duration);
+    cout << "Akulov Vladislav. DFS algorithm solution: ";
+    calculate_time(maze, 1);
     printMaze(maze_copy_DFS, columns, rows);
-    cout << endl << "Programm work: " << duration << " microseconds." << endl;
     cout << "============================" << endl;
-    cout << endl;
 
-
-    cout << "Naschokin Andrey. Wave algorithm solution: " << endl;
-    start = steady_clock::now();
-    maze_main_wave(maze);
-    finish = steady_clock::now();
-    duration = duration_cast<microseconds>(finish - start).count();
-    times.push_back(duration);
+    cout << "Naschokin Andrey. Wave algorithm solution: ";
+    calculate_time(maze, 2);
     printMaze(maze_copy_wave, columns, rows);
-    cout << endl << "Programm work: " << duration << " microseconds." << endl;
     cout << "============================" << endl;
-    cout << endl;
 
-    cout << "Samokrutov Nikolay. Wallfollower algorithm solution: " << endl;
-    start = steady_clock::now();
-    maze_main_wallfollower(maze);
-    finish = steady_clock::now();
-    duration = duration_cast<microseconds>(finish - start).count();
-    times.push_back(duration);
+    cout << "Samokrutov Nikolay. Wallfollower algorithm solution: ";
+    calculate_time(maze, 3);
     printMaze(maze_copy_wallfollower, columns, rows);
-    cout << endl << "Programm work: " << duration << " microseconds." << endl;
     cout << "============================" << endl;
-    cout << endl;
 
-    cout << "Sabaev Nikita. Recursive algorithm solution: " << endl;
-    start = steady_clock::now();
-    maze_main_rec(maze);
-    finish = steady_clock::now();
-    duration = duration_cast<microseconds>(finish - start).count();
-    times.push_back(duration);
+    cout << "Sabaev Nikita. Recursive algorithm solution: ";
+    calculate_time(maze, 4);
     printMaze(maze_copy_rec, columns, rows);
-    cout << endl << "Programm work: " << duration << " microseconds." << endl;
     cout << "============================" << endl;
-    cout << endl;
 
-    cout << "Korotkov Artem. Tremaux algorithm solution: " << endl;
-    start = steady_clock::now();
-    Tremaux(maze);
-    finish = steady_clock::now();
-    duration = duration_cast<microseconds>(finish - start).count();
-    times.push_back(duration);
-    printMaze(Tremaux(maze), columns, rows);
-    cout << endl << "Programm work: " << duration << " microseconds." << endl;
+    cout << "Korotkov Artem. Tremaux algorithm solution: ";
+    calculate_time(maze, 5);
     cout << "============================" << endl;
-    cout << endl;
 
-    cout << "Severin Lavrenty. Dead-end algorithm solution: " << endl;
-    start = steady_clock::now();
-    maze_main_deadend(maze);
-    finish = steady_clock::now();
-    duration = duration_cast<microseconds>(finish - start).count();
-    times.push_back(duration);
+    cout << "Severin Lavrenty. Dead-end algorithm solution: ";
+    calculate_time(maze, 6);
     printMaze(maze_copy_deadend, columns, rows);
-    cout << endl << "Programm work: " << duration << " microseconds." << endl;
     cout << "============================" << endl;
-    cout << endl;
 
     for (int i = 0; i < 6; ++i) {
 
